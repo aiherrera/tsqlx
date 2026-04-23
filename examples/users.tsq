@@ -1,0 +1,26 @@
+@driver postgres
+
+@table users
+
+@version 1
+
+@input
+  userId string
+
+-- Fetch a single user by primary key. Match column names to your own schema.
+@query getUserById
+  SELECT
+    u.id,
+    u.email,
+    u.display_name,
+    u.created_at
+  FROM users u
+  WHERE u.id = {userId}::uuid
+  AND u.deleted_at IS NULL
+  LIMIT 1
+
+@output
+  id string
+  email string
+  display_name string
+  created_at Date
