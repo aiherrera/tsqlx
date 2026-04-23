@@ -1,0 +1,34 @@
+{
+  "name": "@tsqlx/vite",
+  "version": "0.1.0",
+  "description": "Vite plugin: import .tsq files as generated TypeScript (HMR)",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "node --test dist/**/*.test.js"
+  },
+  "dependencies": {
+    "@tsqlx/codegen": "workspace:*"
+  },
+  "peerDependencies": {
+    "vite": "^8.0.10"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "vite": "^8.0.10"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

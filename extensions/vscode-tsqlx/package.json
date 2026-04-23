@@ -1,0 +1,42 @@
+{
+  "name": "vscode-tsqlx",
+  "displayName": "TSQL-X",
+  "description": "Language support for TSQL-X (.tsq) — diagnostics, slot hovers",
+  "version": "0.1.0",
+  "publisher": "tsqlx",
+  "private": true,
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Linters"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "tsq",
+        "aliases": [
+          "TSQL-X"
+        ],
+        "extensions": [
+          ".tsq"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ]
+  },
+  "scripts": {
+    "build": "tsc -p ."
+  },
+  "dependencies": {
+    "@tsqlx/language-server": "workspace:*",
+    "vscode-languageclient": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "@types/vscode": "^1.116.0",
+    "typescript": "^6.0.3"
+  }
+}

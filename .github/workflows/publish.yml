@@ -1,0 +1,41 @@
+# Publish @tsqlx/* to npm when a version tag is pushed.
+# Prereq: set NPM_TOKEN in repo secrets; npm org @tsqlx must allow the token.
+
+name: Publish npm
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.33.1
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "pnpm"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Publish packages
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          pnpm --filter @tsqlx/core publish --no-git-checks --access public
+          pnpm --filter @tsqlx/codegen publish --no-git-checks --access public
+          pnpm --filter @tsqlx/cli publish --no-git-checks --access public
+          pnpm --filter @tsqlx/vite publish --no-git-checks --access public
+          pnpm --filter @tsqlx/language-server publish --no-git-checks --access public

@@ -1,0 +1,28 @@
+{
+  "name": "@tsqlx/codegen",
+  "version": "0.1.0",
+  "description": "TSQL-X code generator: .tsq → TypeScript modules",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc",
+    "test": "node --test dist/**/*.test.js"
+  },
+  "dependencies": {
+    "@tsqlx/core": "workspace:*"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0"
+  }
+}

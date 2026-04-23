@@ -1,0 +1,29 @@
+@driver postgres
+
+@input
+  companyId  string
+  speciesId? string
+  from       Date
+  to         Date
+
+@query getPestReport
+  SELECT
+    s.name AS species_name,
+    COUNT(*)::int AS total,
+    AVG(s.severity)::float8 AS avg_severity,
+    ps.location AS location
+  FROM pest_sightings ps
+  JOIN species s ON s.id = ps.species_id
+  WHERE ps.company_id = {companyId}
+    AND ps.created_at BETWEEN {from} AND {to}
+    [IF speciesId]
+    AND ps.species_id = {speciesId}::uuid
+    [/IF]
+  GROUP BY s.name, ps.location
+  ORDER BY total DESC
+
+@output
+  species_name  string
+  total          number
+  avg_severity   number
+  location       string

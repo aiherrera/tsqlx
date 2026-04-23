@@ -1,0 +1,23 @@
+{
+  "name": "tsqlx",
+  "private": true,
+  "packageManager": "pnpm@10.33.1",
+  "scripts": {
+    "build": "pnpm -r run build",
+    "test": "pnpm --filter @tsqlx/core test && pnpm --filter @tsqlx/codegen test && pnpm --filter @tsqlx/cli test && pnpm --filter @tsqlx/language-server test && pnpm --filter @tsqlx/vite test",
+    "test:integration": "pnpm run build && pnpm --filter @tsqlx/integration-tests test",
+    "test:playground": "pnpm --filter @tsqlx/playground run build && pnpm --filter @tsqlx/playground run test:e2e",
+    "lint": "biome check .",
+    "format": "biome check --write .",
+    "changeset": "changeset",
+    "playground": "pnpm --filter @tsqlx/playground dev",
+    "codegen": "pnpm --filter @tsqlx/cli exec tsqlx compile --root apps/demo --glob \"queries/**/*.tsq\"",
+    "record:playground-gif": "node scripts/record-playground-gif.mjs"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.4.12",
+    "@changesets/cli": "2.31.0",
+    "@types/node": "^25.6.0",
+    "playwright": "1.59.1"
+  }
+}

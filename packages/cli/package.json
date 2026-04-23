@@ -1,0 +1,24 @@
+{
+  "name": "@tsqlx/cli",
+  "version": "0.1.0",
+  "description": "TSQL-X CLI: compile .tsq files to TypeScript",
+  "type": "module",
+  "bin": {
+    "tsqlx": "./dist/cli.js"
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc",
+    "test": "node --test dist/**/*.test.js"
+  },
+  "dependencies": {
+    "@tsqlx/codegen": "workspace:*",
+    "fast-glob": "^3.3.3"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0"
+  }
+}

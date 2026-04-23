@@ -1,0 +1,40 @@
+@driver postgres
+
+@table orders
+
+@version 1
+
+@input
+  userId? string
+  status? string
+  fromDate? Date
+  pageSize? number
+  page number
+
+-- Paginated, filtered list: optional [IF] branches only expand when params are present.
+-- Adjust LIMIT/OFFSET to your driver (e.g. cursor) if needed.
+@query listOrdersPaginated
+  SELECT
+    o.id,
+    o.status,
+    o.placed_at,
+    o.total_cents
+  FROM orders o
+  WHERE 1 = 1
+  [IF userId]
+  AND o.user_id = {userId}::uuid
+  [/IF]
+  [IF status]
+  AND o.status = {status}
+  [/IF]
+  [IF fromDate]
+  AND o.placed_at >= {fromDate}
+  [/IF]
+  ORDER BY o.placed_at DESC
+  LIMIT {pageSize} OFFSET ( {page} - 1 ) * {pageSize}
+
+@output
+  id string
+  status string
+  placed_at Date
+  total_cents number

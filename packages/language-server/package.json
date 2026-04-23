@@ -1,0 +1,27 @@
+{
+  "name": "@tsqlx/language-server",
+  "version": "0.1.0",
+  "description": "Language server for TSQL-X (.tsq) files: diagnostics, slot hovers",
+  "type": "module",
+  "main": "./dist/server.js",
+  "types": "./dist/server.d.ts",
+  "bin": {
+    "tsqlx-language-server": "./dist/server.js"
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc",
+    "test": "node --test dist/**/*.test.js"
+  },
+  "dependencies": {
+    "@tsqlx/core": "workspace:*",
+    "vscode-languageserver": "^9.0.1",
+    "vscode-languageserver-textdocument": "^1.0.12"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

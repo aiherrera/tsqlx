@@ -1,0 +1,28 @@
+@driver postgres
+
+@table orders
+
+@version 1
+
+@input
+  userId string
+
+-- Orders for a user with a recognizable join to customers / users.
+@query listOrdersForUser
+  SELECT
+    o.id,
+    o.total_cents,
+    o.status,
+    o.placed_at,
+    u.email AS customer_email
+  FROM orders o
+  JOIN users u ON u.id = o.user_id
+  WHERE o.user_id = {userId}::uuid
+  ORDER BY o.placed_at DESC
+
+@output
+  id string
+  total_cents number
+  status string
+  placed_at Date
+  customer_email string
