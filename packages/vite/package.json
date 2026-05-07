@@ -22,11 +22,11 @@
     "@tsqlx/codegen": "workspace:*"
   },
   "peerDependencies": {
-    "vite": "^8.0.10"
+    "vite": "^8.0.11"
   },
   "devDependencies": {
     "@types/node": "^25.6.0",
-    "vite": "^8.0.10"
+    "vite": "^8.0.11"
   },
   "engines": {
     "node": ">=20"
